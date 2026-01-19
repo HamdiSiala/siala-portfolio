@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Expériences</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header><h1>Stages et expériences professionnelles</h1>
+<nav>
+  <ul>
+    <li><a href="index.html" class="active">Accueil</a></li>
+    <li><a href="parcours.html">Parcours</a></li>
+    <li><a href="competences.html">Compétences</a></li>
+    <li><a href="experiences.html">Expériences</a></li>
+    <li><a href="matieres.html">Matières</a></li>
+    <li><a href="passions.html">Passions</a></li>
+    <li><a href="quizz.html">Quizz</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="temoignage.html">Témoignage IIT</a></li>
+  </ul>
+</nav>
+</header>
+<main>
+  <section class="experiences">
+    <!-- 🌱 Stage PFE -->
+    <article class="card-experience">
+      <h3>💼 Stage PFE — Société ITDT</h3>
+      <div class="exp-content">
+        <p><strong>Durée :</strong> 3 mois</p>
+        <p><strong>Objectif :</strong> Développer une application web et mobile pour la gestion d’un système de fertilisation intelligente.</p>
+        <p><strong>Technologies :</strong> Spring Boot · Flutter · MySQL · REST API</p>
+      </div>
+    </article>
+
+    <!-- 🎓 Projets Académiques -->
+    <article class="card-experience">
+      <h3>🎓 Projets Académiques</h3>
+
+      <div class="projet">
+        <h4>📚 Gestion d’une bibliothèque</h4>
+        <p>Application <strong>PHP/MySQL</strong> avec interface de suivi des livres, utilisateurs et emprunts.</p>
+      </div>
+
+      <div class="projet">
+        <h4>💪 Plateforme Salle de sport</h4>
+        <p>Site web développé avec <strong>HTML/CSS</strong>, offrant une expérience immersive et moderne pour la présentation des activités.</p>
+      </div>
+
+      <div class="projet">
+        <h4>🧾 Application Service Client</h4>
+        <p>Développement <strong>React (Front-end)</strong> et <strong>Spring Boot (Back-end)</strong> pour la gestion des réparations et la génération automatique des factures clients.</p>
+      </div>
+
+      <div class="projet">
+        <h4>📅 Calendrier des Examens</h4>
+        <p>Application web complète pour la <strong>gestion des surveillances d’examens</strong> au sein d’un établissement universitaire.</p>
+
+        
+
+        <p><strong>Technologies :</strong> Spring Boot · React.js · MySQL · TailwindCSS</p>
+      </div>
+    </article>
+  </section>
+</main>
+
+
+<footer>
+  <span class="shine">© 2025 - Créé par SIALA HAMDI. Tous droits réservés.</span>
+</footer>
+
+
+
+<!-- 🌙 Bouton du mode clair/sombre -->
+<button class="theme-toggle" id="themeToggle">🌙</button>
+
+<!-- 🌌 Fond de particules -->
+<canvas id="particles"></canvas>
+
+<!-- 💫 Curseur personnalisé -->
+<div class="cursor"></div>
+
+<!-- ===================== SCRIPT GLOBAL ===================== -->
+<script>
+/* === MODE CLAIR / SOMBRE === */
+const themeToggle = document.getElementById("themeToggle");
+const body = document.body;
+
+// Charger le thème sauvegardé
+if (localStorage.getItem("theme") === "light") {
+  body.classList.add("light-mode");
+  themeToggle.textContent = "☀️";
+}
+
+// Lorsqu’on clique sur le bouton
+themeToggle.addEventListener("click", () => {
+  body.classList.add("mode-switch");
+  setTimeout(() => body.classList.remove("mode-switch"), 900);
+
+  body.classList.toggle("light-mode");
+  const isLight = body.classList.contains("light-mode");
+  themeToggle.textContent = isLight ? "☀️" : "🌙";
+  localStorage.setItem("theme", isLight ? "light" : "dark");
+});
+
+/* === CURSEUR DORÉ INTERACTIF === */
+const cursor = document.querySelector(".cursor");
+document.addEventListener("mousemove", e => {
+  cursor.style.top = e.pageY + "px";
+  cursor.style.left = e.pageX + "px";
+});
+document.addEventListener("mousedown", () => cursor.classList.add("active"));
+document.addEventListener("mouseup", () => cursor.classList.remove("active"));
+
+/* === PARTICULES 3D === */
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+let particles = Array.from({ length: 300 }, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+  size: Math.random() * 1.5,
+  speedX: (Math.random() - 0.5) * 0.3,
+  speedY: (Math.random() - 0.5) * 0.3,
+}));
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    p.x += p.speedX;
+    p.y += p.speedY;
+
+    if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+
+    ctx.fillStyle = "rgba(255,215,0,0.7)"; // couleur dorée
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
+window.addEventListener("resize", () => {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+});
+
+/* === EFFET CAMÉRA 3D (mouvement selon la souris) === */
+document.addEventListener("mousemove", (e) => {
+  const x = (window.innerWidth / 2 - e.pageX) / 80;
+  const y = (window.innerHeight / 2 - e.pageY) / 80;
+  document.body.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+});
+</script>
+<!-- ===================== FIN DU SCRIPT ===================== -->
+
+
+
+
+<script>
+/* === EFFET "TYPING" === */
+const nom = document.getElementById("nom");
+const texte = nom.textContent;
+nom.textContent = "";
+let i = 0;
+
+function ecrire() {
+  if (i < texte.length) {
+    nom.textContent += texte.charAt(i);
+    i++;
+    setTimeout(ecrire, 100); // vitesse de frappe
+  } else {
+    nom.style.borderRight = "none"; // retirer le curseur à la fin
+  }
+}
+window.addEventListener("load", ecrire);
+</script>
+
+
+
+<script>
+const sections = document.querySelectorAll("section");
+const reveal = () => {
+  sections.forEach(s => {
+    const rect = s.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) s.classList.add("visible");
+  });
+};
+window.addEventListener("scroll", reveal);
+reveal();
+</script>
+
+
+
+
+<script>
+const canvas = document.createElement('canvas');
+document.body.appendChild(canvas);
+canvas.id = "stars";
+const ct = canvas.getContext('2d');
+canvas.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;";
+let w, h;
+function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+window.addEventListener("resize", resize);
+resize();
+
+const stars = Array.from({ length: 150 }, () => ({
+  x: Math.random() * w,
+  y: Math.random() * h,
+  z: Math.random() * 2 + 0.5
+}));
+
+function draw() {
+  ct.fillStyle = "rgba(0,0,0,0.2)";
+  ct.fillRect(0,0,w,h);
+  ct.fillStyle = "rgba(255,215,0,0.7)";
+  stars.forEach(s => {
+    ct.beginPath();
+    ct.arc(s.x, s.y, s.z, 0, Math.PI*2);
+    ct.fill();
+    s.y += s.z;
+    if (s.y > h) s.y = 0;
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+<script>
+  const links = document.querySelectorAll("nav a");
+  links.forEach(link => {
+    if (link.href === window.location.href) {
+      link.classList.add("active");
+    } else {
+      link.classList.remove("active");
+    }
+  });
+</script>
+
+</body>
+</html>
